@@ -1,0 +1,35 @@
+\documentclass{standalone}
+\usepackage{tkz-base}
+\usepackage{tkz-fct}
+\usepackage{tkz-euclide}
+\usepackage{tikz}
+\begin{document}
+    \begin{tikzpicture}
+        \pgfmathsetmacro\xx{4}
+        \pgfmathsetmacro\y{4}
+        \pgfmathsetmacro\c{2}
+        \pgfmathsetmacro\sa{.5}
+        \pgfmathsetmacro\sb{sqrt(\c^2-\sa^2)}
+        \pgfmathsetmacro\ta{3}
+        \pgfmathsetmacro\tb{sqrt(\ta^2-\c^2)}
+        
+        \coordinate (O) at (0,0);
+        \coordinate (F1) at (-\c,0);
+        \coordinate (F2) at (\c,0);
+        \tkzInit[ymax=\y,ymin=-\y,xmax=\xx,xmin=-\xx] 
+        \clip (-\xx-0.1,0) |- (0,\y+0.2) -| (\xx+0.2,0) |- (0,-\y) -| cycle;
+        % \tkzFctPar[samples=400,domain=-0.4*pi:0.4*pi]{\a/(cos(t))}{\b*(tan(t))}
+        % \tkzFctPar[samples=400,domain=0.6*pi:1.4*pi,name path = a]{\a/(cos(t))}{\b*(tan(t))}
+        \draw [domain = -0.4*pi:0.4*pi,name path = b] plot ({\sa/(cos(\x r))},{\sb*(tan(\x r))});
+        \draw [domain = -0.4*pi:0.4*pi] plot ({-\sa/(cos(\x r))},{\sb*(tan(\x r))});
+        \draw [domain=-5:5,dashed,name path= a](O) circle [x radius =\ta,y radius=\tb];
+        \fill [name intersections={of=a and b,by=P}]
+        (P) circle (1pt) node [left] {$P$};
+        \draw[-stealth] (-\xx,0) -- (\xx,0) node [below] {$x$};
+        \draw[-stealth] (0,-\y) -- (0,\y) node [right] {$y$};
+        \fill (O) node [below left] {$O$} circle (1pt);
+        \fill (F1) node [below] {$F_1$} circle (1pt);
+        \fill (F2) node [below] {$F_2$} circle (1pt);
+        \draw (F1)--(P)node[left,pos=0.4]{$m$}--(F2)node[left,pos=0.6]{$n$};
+    \end{tikzpicture}
+\end{document}

@@ -1,0 +1,32 @@
+\documentclass[border=0.2cm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{3d,calc}
+\usepackage{tikz-3dplot-circleofsphere}
+
+\begin{document}
+
+\def\r{1} \def\theta{-30}\tdplotsetmaincoords{75}{110}
+\begin{tikzpicture}[tdplot_main_coords,scale =3 ] 
+\draw[tdplot_screen_coords] (0,0,0) circle (\r);
+\tdplotCsDrawLatCircle{\r}{\theta} 
+\tdplotCsDrawLatCircle{\r}{-\theta} 
+
+\tdplotsetcoord{A}{\r}{90-\theta}{-80}
+\tdplotsetcoord{B}{\r}{90-\theta}{60}
+\tdplotsetcoord{C}{\r}{90-\theta}{150}
+\tdplotsetcoord{A1}{\r}{90+\theta}{-80}
+\tdplotsetcoord{B1}{\r}{90+\theta}{60}
+\tdplotsetcoord{C1}{\r}{90+\theta}{150}
+\tdplotsetcoord{O}{0}{0}{0}
+\tdplotsetcoord{O1}{{abs(\r*sin(\theta))}}{180}{0}
+\tdplotsetcoord{O2}{{abs(\r*sin(\theta))}}{0}{0}
+\foreach \i in {A,B,C,A1,B1,C1,O2,O,O1}
+    \filldraw (\i) circle (0.5pt);
+
+\draw (A) --(B)--(C) (A1) --(B1)--(C1)--(A1) (A1)--(A) (B1)--(B) (C1)--(C);
+\draw[dashed] (O2)--(O1) (A)--(C);
+\end{tikzpicture}
+
+
+
+\end{document}

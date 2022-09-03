@@ -1,0 +1,38 @@
+\documentclass{standalone}
+\usepackage{tkz-base}
+\usepackage{tkz-fct}
+\usepackage{tkz-euclide}
+\usepackage{tikz}
+\begin{document}
+    \begin{tikzpicture}
+        \pgfmathsetmacro\x{3}
+        \pgfmathsetmacro\y{2.7}
+        \pgfmathsetmacro\a{2.5}
+        \pgfmathsetmacro\b{2}
+        \pgfmathsetmacro\c{sqrt(abs(\a^2-\b^2))}
+        \pgfmathsetmacro\px{1}
+        \pgfmathsetmacro\py{sqrt((\b^2)*(1-((\px)^2)/(\a^2)))}
+        \pgfmathsetmacro\rPF{sqrt((\px+\c)^2+\py^2)/2}
+        \pgfmathsetmacro\RPF{sqrt((\px-\c)^2+\py^2)/2}
+        \coordinate (O) at (0,0);
+        \coordinate (F1) at (-\c,0);
+        \coordinate (F2) at (\c,0);
+        \coordinate (P) at (\px,\py);
+        \coordinate (A) at ($(P)!0.5!(F1)$);
+        \coordinate (B) at ($(P)!0.5!(F2)$);
+        \draw[-stealth] (-\x,0) -- (\x,0) node [below] {$x$};
+        \draw[-stealth] (0,-\y) -- (0,\y) node [right] {$y$};
+        \fill (O) node [below left] {$O$} circle (1pt);
+        \fill (F1) node [below] {$F_1$} circle (1pt);
+        \fill (F2) node [below] {$F_2$} circle (1pt);
+        \fill (P) node [above] {$P$} circle (1pt);
+        \fill (A) node [above] {$A$} circle (1pt);
+        \fill (B) node [left] {$B$} circle (1pt);
+
+        \draw (O) circle [x radius=\a,y radius=\b];
+        \draw (O) circle (\a);
+        \draw (A) circle (\rPF);
+        \draw (B) circle (\RPF);
+        \draw[cyan,dashed] (F1) -- (P) --(F2) (O)--(A);
+    \end{tikzpicture}
+\end{document}

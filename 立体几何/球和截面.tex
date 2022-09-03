@@ -1,0 +1,19 @@
+\documentclass[border=0.2cm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{3d,calc}
+\usepackage{tikz-3dplot-circleofsphere}
+
+\begin{document}
+\def\r{1} \def\theta{-30}\tdplotsetmaincoords{75}{110}
+\begin{tikzpicture}[tdplot_main_coords,scale =2 ] 
+\filldraw (0,0,0) circle (0.5pt);                     
+\filldraw (0,0,{\r*sin(\theta)}) circle (0.5pt);
+\draw[tdplot_screen_coords] (0,0,0) circle (\r);
+\tdplotCsDrawLatCircle{\r}{\theta} 
+
+% \tdplotCsDrawLatCircle[tdplotCsFront/.style={green}]{\r}{40} 
+\end{tikzpicture}
+
+
+
+\end{document}

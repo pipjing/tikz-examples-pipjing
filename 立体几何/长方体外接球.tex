@@ -1,0 +1,35 @@
+\documentclass[border=0.2cm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{3d,calc}
+\usepackage{tikz-3dplot-circleofsphere}
+
+\begin{document}
+
+\def\r{1} \def\theta{-20}\tdplotsetmaincoords{75}{110}
+\begin{tikzpicture}[tdplot_main_coords,scale =3 ] 
+\draw[tdplot_screen_coords] (0,0,0) circle (\r);
+\tdplotCsDrawLatCircle{\r}{\theta} 
+\tdplotCsDrawLatCircle{\r}{-\theta} 
+\def\alpha{-40}
+\tdplotsetcoord{A}{\r}{90-\theta}{0+\alpha}
+\tdplotsetcoord{B}{\r}{90-\theta}{90+\alpha}
+\tdplotsetcoord{C}{\r}{90-\theta}{180+\alpha}
+\tdplotsetcoord{D}{\r}{90-\theta}{270+\alpha}
+\tdplotsetcoord{A1}{\r}{90+\theta}{0+\alpha}
+\tdplotsetcoord{B1}{\r}{90+\theta}{90+\alpha}
+\tdplotsetcoord{C1}{\r}{90+\theta}{180+\alpha}
+\tdplotsetcoord{D1}{\r}{90+\theta}{270+\alpha}
+\tdplotsetcoord{O}{0}{0}{0}
+% \tdplotsetcoord{O1}{{abs(\r*sin(\theta))}}{180}{0}
+% \tdplotsetcoord{O2}{{abs(\r*sin(\theta))}}{0}{0}
+\foreach \i in {A,B,C,D,A1,B1,C1,O,D1}
+    \filldraw (\i) circle (0.5pt)
+    % node {$\i$}
+    ;
+\draw (A) --(B)--(C) (A1) --(B1)--(C1)--(D1)--(A1) (A1)--(A) (B1)--(B) (C1)--(C);
+\draw[dashed]  (A)--(C1) (A)--(D)--(D1) (C)--(D);
+\end{tikzpicture}
+
+
+
+\end{document}

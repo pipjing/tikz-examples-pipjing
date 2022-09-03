@@ -1,0 +1,18 @@
+\documentclass[border=0.2cm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{3d,calc}
+\usepackage{tikz-3dplot-circleofsphere}
+
+\begin{document}
+\def\r{1.5} \tdplotsetmaincoords{75}{110}
+\begin{tikzpicture}[tdplot_main_coords,scale =2 ] \begin{scope}
+\filldraw (0,0,0) circle (1pt);
+\draw[tdplot_screen_coords] (0,0,0) circle (\r);
+\tdplotCsDrawLatCircle{\r}{0} 
+\end{scope}
+% \tdplotCsDrawLatCircle[tdplotCsFront/.style={green}]{\r}{40} 
+\end{tikzpicture}
+
+
+
+\end{document}
